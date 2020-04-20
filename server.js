@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const server = express();
 
 const session = require("express-session");
@@ -20,6 +20,7 @@ const sessionConfig = {
 
 server.use(express.json());
 server.use(session(sessionConfig));
+server.use(cors());
 
 const usersRouter = require("./data/users-router");
 const authRouter = require("./data/auth-router");

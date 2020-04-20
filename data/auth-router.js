@@ -10,14 +10,16 @@ router.post("/login", (req, res) => {
       // try matching password here
       if (password && bcrypt.compareSync(password, user.password)) {
         req.session.userId = user.id;
-        res.status(200).json({ message: "logged in for 10 seconds" });
+        res
+          .status(200)
+          .json({ message: "logged in", token: "FAKETOKENHERE-" + Date.now() });
         // store a session so login persists
       } else {
         res.status(401).json({ message: "You shall not pass" });
       }
     })
     .catch((err) => {
-      res.json({ message: "check credentials" });
+      res.status(401).json({ message: "check credentials" });
     });
 });
 
